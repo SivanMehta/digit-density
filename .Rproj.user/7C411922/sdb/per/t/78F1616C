@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1501285568628.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "78F1616C",
+    "lastKnownWriteTime" : 1501285525,
+    "last_content_update" : 1501285525,
+    "path" : "~/Documents/Side Projects/digit-density/generate-data.R",
+    "project_path" : "generate-data.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
