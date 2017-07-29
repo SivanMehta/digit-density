@@ -22,6 +22,15 @@ convert.vector.to.base <- function(v, base) {
   sapply(v, convert.to.base, base)
 }
 
+density.for.base <- function(data, base) {
+  contains <- grepl("3", convert.vector.to.base(data$x, base))
+  before <- cumsum(contains)
+  density <- before / data$x
+  return (
+    data %>% mutate(as.name(paste('density.', base)) := density)
+  )
+}
+
 tibble(x = 1:10000) %>%
   mutate(contains.10 = grepl("3", convert.vector.to.base(x, 10))) %>%
   mutate(before.10 = cumsum(contains.10)) %>%
