@@ -37,7 +37,7 @@ density.for.bases <- function(data, bases) {
   return(data)
 }
 
-tibble(x = 1:10000) %>%
+tibble(x = 1:100000) %>%
   density.for.bases(4:10) %>%
   ggplot() +
   geom_line(aes(x = log(x), y = density.10),colour = '#ffffff') +
@@ -47,7 +47,7 @@ tibble(x = 1:10000) %>%
   geom_line(aes(x = log(x), y = density.6), colour = '#7f7f7f') +
   geom_line(aes(x = log(x), y = density.5), colour = '#5f5f5f') +
   geom_line(aes(x = log(x), y = density.4), colour = '#3f3f3f') +
-  labs(title = 'Proportion of previous numbers containing the number "3", by base',
+  labs(title = 'Proportion of previous numbers that contain the number "3", by base',
        subtitle = "Darker color indicates larger base system",
        y = "proportion")
   
