@@ -26,40 +26,19 @@ density.for.base <- function(data, base) {
   contains <- grepl("3", convert.vector.to.base(data$x, base))
   before <- cumsum(contains)
   density <- before / data$x
-  return (
-    data %>% mutate(as.name(paste('density.', base)) := density)
-  )
+  data[[paste('density', base, sep = '.')]] <- density
+  return(data)
+}
+
+density.for.bases <- function(data, bases) {
+ for(base in bases) {
+   data <- data %>% density.for.base(base)
+ }
+  return(data)
 }
 
 tibble(x = 1:10000) %>%
-  mutate(contains.10 = grepl("3", convert.vector.to.base(x, 10))) %>%
-  mutate(before.10 = cumsum(contains.10)) %>%
-  mutate(density.10 = before.10 / x) %>%
-  
-  mutate(contains.9 = grepl("3", convert.vector.to.base(x, 9))) %>%
-  mutate(before.9 = cumsum(contains.9)) %>%
-  mutate(density.9 = before.9 / x) %>%
-  
-  mutate(contains.8 = grepl("3", convert.vector.to.base(x, 8))) %>%
-  mutate(before.8 = cumsum(contains.8)) %>%
-  mutate(density.8 = before.8 / x) %>%
-  
-  mutate(contains.7 = grepl("3", convert.vector.to.base(x, 7))) %>%
-  mutate(before.7 = cumsum(contains.7)) %>%
-  mutate(density.7 = before.7 / x) %>%
-  
-  mutate(contains.6 = grepl("3", convert.vector.to.base(x, 6))) %>%
-  mutate(before.6 = cumsum(contains.6)) %>%
-  mutate(density.6 = before.6 / x) %>%
-  
-  mutate(contains.5 = grepl("3", convert.vector.to.base(x, 5))) %>%
-  mutate(before.5 = cumsum(contains.5)) %>%
-  mutate(density.5 = before.5 / x) %>%
-  
-  mutate(contains.4 = grepl("3", convert.vector.to.base(x, 4))) %>%
-  mutate(before.4 = cumsum(contains.4)) %>%
-  mutate(density.4 = before.4 / x) %>%
-  
+  density.for.bases(4:10) %>%
   ggplot() +
   geom_line(aes(x = log(x), y = density.10),colour = '#ffffff') +
   geom_line(aes(x = log(x), y = density.9), colour = '#dfdfdf') +
